@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Music Player</title>
+    <script>
+        (function() {
+            const userLanguage = navigator.language || navigator.userLanguage;
+            
+            const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+            
+            if (userLanguage.startsWith('zh')) {
+                window.location.replace('./cn/');
+                return;
+            }
+            
+            if (userLanguage.startsWith('ru')) {
+                window.location.replace('./ru/');
+                return;
+            }
+            
+            const europeanLanguages = ['en', 'fr', 'de', 'es', 'pt', 'it', 'nl'];
+            const isEuropeanLanguage = europeanLanguages.some(lang => userLanguage.startsWith(lang));
+            
+            const europeanTimeZones = [
+                'Europe/', 'Atlantic/', 'GMT', 'UTC', 'Etc/'
+            ];
+            const isEuropeanTimeZone = europeanTimeZones.some(tz => userTimeZone.includes(tz));
+            
+            const americanTimeZones = [
+                'America/', 'US/', 'Canada/', 'Brazil/'
+            ];
+            const isAmericanTimeZone = americanTimeZones.some(tz => userTimeZone.includes(tz));
+            
+            if (isEuropeanLanguage || isEuropeanTimeZone || isAmericanTimeZone) {
+                window.location.replace('./en/');
+                return;
+            }
+            
+            window.location.replace('./en/');
+        })();
+    </script>
+</head>
+<body>
+</body>
+</html>
